@@ -1,6 +1,58 @@
 import 'package:flutter/material.dart';
 
-void main() => runApp(MyApp());
+//void main() => runApp(MyApp());
+
+void main() {
+  runApp(MaterialApp(
+    title: 'Navigation Basics',
+    home: FirstScreen(),
+  ));
+}
+
+class FirstScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('First Screen'),
+      ),
+      body: Center(
+        child: RaisedButton(
+          child: Text('Launch screen'),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => SecondScreen()),
+            );
+          },
+        ),
+      ),
+    );
+  }
+}
+
+
+class SecondScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Second Screen"),
+      ),
+      body: Center(
+        child: RaisedButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          child: Text('Go back!'),
+        ),
+      ),
+    );
+  }
+}
+
+
+
 
 
 class FavouriteWidget extends StatefulWidget {
@@ -58,13 +110,6 @@ class _FavouriteWidgetState extends State<FavouriteWidget> {
 
 
 }
-
-
-
-
-
-
-
 
 class MyApp extends StatelessWidget {
 
@@ -127,11 +172,6 @@ class MyApp extends StatelessWidget {
   }
 
 
-
-
-  
-
-
   @override
   Widget build(BuildContext context) {
 
@@ -184,3 +224,5 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+
