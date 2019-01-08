@@ -1,13 +1,45 @@
 import 'package:flutter/material.dart';
+import 'package:myapp/FavouriteWidget.dart';
+import 'package:myapp/Todo.dart';
+import 'package:myapp/TodoScreen.dart';
 
-//void main() => runApp(MyApp());
+// void main() => runApp(LakeApp());
+
+//void main() {
+//  runApp(MaterialApp(
+//    home: LakeApp(),
+//    title: 'Lake App',
+//  ));
+//}
+
+//void main() {
+//  runApp(
+//    MaterialApp(
+//      title: 'Hello Rectangle',
+//      home: Scaffold(
+//        body: TodosScreen(),
+//      ),
+//    ),
+//  );
+//}
+
+// To-do Screen
 
 void main() {
   runApp(MaterialApp(
-    title: 'Navigation Basics',
-    home: FirstScreen(),
+    title: 'A',
+    home: TodoListScreen(todos: List.generate(20,
+            (i) => Todo('Todo $i', 'Description'))),
   ));
 }
+
+
+//void main() {
+//  runApp(MaterialApp(
+//    title: 'Navigation Basics',
+//    home: FirstScreen(),
+//  ));
+//}
 
 class FirstScreen extends StatelessWidget {
   @override
@@ -52,69 +84,10 @@ class SecondScreen extends StatelessWidget {
 }
 
 
+class LakeApp extends StatelessWidget {
 
 
-
-class FavouriteWidget extends StatefulWidget {
-
-  @override
-  _FavouriteWidgetState createState() {
-    return _FavouriteWidgetState();
-  }
-}
-
-class _FavouriteWidgetState extends State<FavouriteWidget> {
-  bool _isFavourite = true;
-  int _favouriteCount = 41;
-
-  void _toggleFavourite(){
-    setState(() {
-      if(_isFavourite) {
-        _isFavourite = false;
-        _favouriteCount -= 1;
-      }
-      else {
-        _isFavourite = true;
-        _favouriteCount += 1;
-
-      }
-    });
-
-  }
-
-
-  @override
-  Widget build(BuildContext context) {
-
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: <Widget>[
-        Container(
-          padding: const EdgeInsets.all(8.0),
-          child: IconButton(
-              icon: (_isFavourite ? Icon(Icons.star) : Icon(Icons.star_border)),
-              onPressed: _toggleFavourite
-          ),
-        ),
-        SizedBox(
-          width: 18.0,
-          child: Container(
-            child: Text('$_favouriteCount'),
-          ),
-        ),
-      ],
-
-    );
-
-  }
-
-
-}
-
-class MyApp extends StatelessWidget {
-
-
-  Widget titleSection = Container(
+  final Widget titleSection = Container(
     padding: const EdgeInsets.all(32.0),
     child: Row(
       children: [
