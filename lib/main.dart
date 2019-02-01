@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:myapp/FavouriteWidget.dart';
-import 'package:myapp/Todo.dart';
-import 'package:myapp/TodoScreen.dart';
 
 // void main() => runApp(LakeApp());
 
@@ -25,21 +23,29 @@ import 'package:myapp/TodoScreen.dart';
 
 // To-do Screen
 
-void main() {
-  runApp(MaterialApp(
-    title: 'A',
-    home: TodoListScreen(todos: List.generate(20,
-            (i) => Todo('Todo $i', 'Description'))),
-  ));
-}
-
-
 //void main() {
 //  runApp(MaterialApp(
-//    title: 'Navigation Basics',
-//    home: FirstScreen(),
+//    title: 'A',
+//    home: TodoListScreen(todos: List.generate(20,
+//            (i) => Todo('Todo $i', 'Description'))),
 //  ));
 //}
+
+// Routing - https://flutter.io/docs/development/ui/navigation
+// Named Routes - https://flutter.io/docs/cookbook/navigation/named-routes
+
+void main() {
+  runApp(MaterialApp(
+    title: 'Navigation Basics',
+    initialRoute: '/',
+    routes: {
+      '/': (context) => FirstScreen(),
+      '/second': (context) => SecondScreen(),
+
+    },
+
+  ));
+}
 
 class FirstScreen extends StatelessWidget {
   @override
@@ -52,10 +58,12 @@ class FirstScreen extends StatelessWidget {
         child: RaisedButton(
           child: Text('Launch screen'),
           onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => SecondScreen()),
-            );
+            Navigator.pushNamed(context, '/second');
+
+//            Navigator.push(
+//              context,
+//              MaterialPageRoute(builder: (context) => SecondScreen()),
+//            );
           },
         ),
       ),
