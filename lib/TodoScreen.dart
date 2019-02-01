@@ -16,6 +16,7 @@ class TodoListScreen extends StatelessWidget {
         itemCount: todos.length,
         itemBuilder: (context, index) {
           final Todo todo = todos[index];
+
           final MaterialPageRoute route = MaterialPageRoute(
               builder: (context) => TodoDetailScreen(todo: todo));
 

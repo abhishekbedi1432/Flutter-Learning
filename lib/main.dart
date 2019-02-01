@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:myapp/FavouriteWidget.dart';
+import 'package:myapp/Todo.dart';
+import 'package:myapp/TodoScreen.dart';
 
 // void main() => runApp(LakeApp());
 
@@ -37,15 +39,90 @@ import 'package:myapp/FavouriteWidget.dart';
 void main() {
   runApp(MaterialApp(
     title: 'Navigation Basics',
-    initialRoute: '/',
+    initialRoute: '/initial',
     routes: {
+      '/initial': (context) =>
+          TodoListScreen(todos: List.generate(20,
+                  (i) => Todo('Todo $i', 'Description'))),
       '/': (context) => FirstScreen(),
       '/second': (context) => SecondScreen(),
+      '/selectionScreen': (context) => SelectionScreen(),
 
     },
 
   ));
 }
+
+class HomeScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('First Screen'),
+      ),
+      body: Center(child: SelectionButton()),
+    );
+  }
+}
+
+class SelectionButton extends StatelessWidget {
+
+  @override
+  Widget build(BuildContext context) {
+    return RaisedButton(
+      onPressed: () {
+        _navigateAndDisplaySelection(context);
+      },
+      child: Text('Pick an option, any option!'),
+
+    );
+  }
+
+  _navigateAndDisplaySelection(BuildContext context) async {
+    // Navigator.push returns a Future that will complete after we call
+    // Navigator.pop on the Selection Screen!
+    final result = await Navigator.pushNamed(context, '/selectionScreen');
+    Scaffold.of(context)
+      ..removeCurrentSnackBar()
+      ..showSnackBar(SnackBar(content: Text("$result")));
+  }
+}
+
+class SelectionScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Pick an option'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+
+          children: <Widget>[
+
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: RaisedButton(onPressed: () {
+                Navigator.pop(context, 'Yep!');
+              }, child: Text('Yep!')),
+            ),
+
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: RaisedButton(onPressed: () {
+                Navigator.pop(context, 'Nope!');
+              }, child: Text('Nope!')),
+            ),
+
+          ],
+        ),
+      ),
+    );
+  }
+
+}
+
 
 class FirstScreen extends StatelessWidget {
   @override
